@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign Up</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container mt-5 mb-5">
+	    <div class="row d-flex justify-content-center align-items-center">
+	        <div class="col-md-5">
+	            <div class="card bg-dark p-3 text-center text-white">
+	                <h1>Join Wait-list</h1>
+	                <div class="p-2 px-5">
+	                	<form id="joinForm">
+	                		<div class="form-group">
+			                	<input class="form-control" name="fullName" placeholder="Full Name" required="">
+	                			
+	                		</div>
+	                		<div class="form-group">
+			                	<input type="email" class="form-control" name="email" placeholder="Email" required="">
+	                			
+	                		</div>
+	                		<div class="form-group mt-3 mb-3">
+			                	<select class="form-select" name="type" id="typeSelect" required="">
+			                        <option value="">Choose Type</option>
+			                        <option value="investor">Investor</option>
+			                        <option value="asset_lister">Asset Lister</option>
+			                    </select>
+	                		</div>
+
+	                		<div class="form-group mt-3 mb-3" style="display:none;">
+			                    <textarea name="asset_description" id="assetDesc" class="form-control" placeholder="Asset Description"></textarea>
+	                		</div>
+
+		                    <button class="btn btn-danger w-100 signup-button" type="submit">Join Now</button>
+		                </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#typeSelect").change(function(event) {
+				if ($(this).val() == "asset_lister") {
+					$("#assetDesc").parent().slideDown();
+				} else {
+					$("#assetDesc").parent().slideUp();
+				}
+			});
+			$("#joinForm").submit(function(event) {
+				event.preventDefault();
+
+				var formData = new FormData($(this)[0]);       
+				btn = $(this).find("[type=submit]");
+				btn_text = btn.text();
+				btn.text("please wait..");
+				btn.addClass("disabled");
+				btn.attr("disabled", true);
+
+				var req = ajax_request("api/join-waitlist", formData);
+				req.done(function (data) {
+					if (data.error == false) {
+						alert(data.message);
+						window.location.reload(true);
+					} else {
+						alert(data.message);
+						btn.text(btn_text);
+						btn.removeClass("disabled");
+						btn.removeAttr("disabled");
+					}
+				});
+				req.fail(function (xhr) {
+					btn.text(btn_text);
+					btn.removeClass("disabled");
+					btn.removeAttr("disabled");
+				});
+			});
+
+			function ajax_request(url, data) {
+				var send = $.ajax({
+					url: url,
+					global: false,
+					type: "POST",
+					data: data,
+					dataType: "json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					error: function (xhr) {
+						if (xhr.status == 404 || xhr.status == 500) {
+							alert("An unexpected error seems to have occurred. Now that we know, we're working to fix it ☺. ERROR : " + xhr.status);
+						}
+					},
+				});
+				return send;
+			}
+		});
+	</script>
+</body>
+</html>

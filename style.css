@@ -1,0 +1,36 @@
+body {
+    background-color: #eee
+}
+
+.form-control {
+    background-color: #212529;
+    border: 1px solid #fff;
+    caret-color: #fff;
+    color: #fff;
+    height: 45px;
+    margin-top: 14px
+}
+
+.form-control:focus {
+    background-color: #212529;
+    box-shadow: none;
+    border: 1px solid #fff;
+    color: #fff
+}
+
+.form-select {
+    background-color: #212529;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 15px;
+    height: 45px
+}
+
+.form-select:focus {
+    box-shadow: none;
+    border: 1px solid #fff
+}
+
+.signup-button {
+    height: 48px
+}
