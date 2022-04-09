@@ -1,5 +1,10 @@
 "# completedatask" 
 
+Was supposed to be a task for a job application on one Diralabs
+Guess they didn't like it or just took the project and declined the job
+
+https://gist.github.com/geektutor/1e7549adecde7b95691a940fedf9f148
+
 ## The task
 Provide an API endpoint that helps people to join a waitlist. The waitlist would be able to accomodate two types of waitlisters:
 
