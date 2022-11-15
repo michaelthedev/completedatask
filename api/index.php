@@ -5,8 +5,6 @@
 // | @author_email  : henttech@gmail.com
 // | @date 			: 2021-05-06 21:12:45
 // +------------------------------------------------------------------------+
-// | Copyright (c) 2021 HENT Technologies. All rights reserved.
-// +------------------------------------------------------------------------+
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
